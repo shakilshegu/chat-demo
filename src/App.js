@@ -1,6 +1,5 @@
 import { CometChat } from "@cometchat-pro/chat";
-import { CometChatUI } from "./cometchat-pro-react-ui-kit/CometChatWorkspace/src/components";
-import OrderStatus from "./component/orderstatus";
+
 import ChatUI from "./component/chatUI";
 
 import "./App.css";
