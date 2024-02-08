@@ -1,6 +1,10 @@
 import { CometChat } from "@cometchat-pro/chat";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import BrowserRouter as Router
-import ChatRoute from "./Rotes/chatRoute";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from "react";
+import ChatUI from "./component/chatUI";
+import { chatContext } from "./component/context";
+import './index.css';
+
 
 const appID = process.env.REACT_APP_COMETCHAT_APP_ID;
 const region = process.env.REACT_APP_COMETCHAT_REGION;
@@ -19,12 +23,18 @@ CometChat.init(appID, appSetting).then(
 );
 
 function App() {
+  const [currentOrder, setCurrentOrder] = useState({});
+
   return (
-    <Router> {/* Wrap your entire application with Router */}
-      <Routes>
-        <Route path='/*' element={<ChatRoute />} />
-      </Routes>
-    </Router>
+    <Router>
+    <Routes>
+      <Route path='/influencer' element={
+        <chatContext.Provider value={{ currentOrder, setCurrentOrder }}>
+          <ChatUI/>
+        </chatContext.Provider>
+      } />
+    </Routes>
+  </Router>
   );
 }
 
