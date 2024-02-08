@@ -1,10 +1,6 @@
 import { CometChat } from "@cometchat-pro/chat";
-
-import ChatUI from "./component/chatUI";
-
-import "./App.css";
-import { chatContext } from "./component/context";
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import BrowserRouter as Router
+import ChatRoute from "./Rotes/chatRoute";
 
 const appID = process.env.REACT_APP_COMETCHAT_APP_ID;
 const region = process.env.REACT_APP_COMETCHAT_REGION;
@@ -22,47 +18,13 @@ CometChat.init(appID, appSetting).then(
   }
 );
 
-// create uer function
-const authKey = process.env.REACT_APP_COMETCHAT_AUTH_KEY;
-
-//* User Registration
-
-// const name = "Brand";
-// const role = "1"
-// var user = new CometChat.User(uid,role)
-// user.setName(name);
-// user.setRole(role);
-
-// CometChat.createUser(user, authKey).then(
-//   user => {
-//     console.log("user created",user);
-//   },error =>{
-//     console.log("error creating user",error);
-//   }
-// )
-
-//* login user functions
-// let uid = "inf7001"
-// CometChat.login(uid, authKey).then(
-//   (user) => {
-//     console.log("User logged in Successfully", { user });
-//   },
-//   (error) => {
-//     console.log("login failed ", { error });
-//   }
-// );
-
 function App() {
-  const [currentOrder, setCurrentOrder] = useState({});
   return (
-    <div className="">
-      <chatContext.Provider value={{ currentOrder, setCurrentOrder }}>
-        {/* influencer */}
-        <ChatUI/>
-        {/*Brand */}
-
-      </chatContext.Provider>
-    </div>
+    <Router> {/* Wrap your entire application with Router */}
+      <Routes>
+        <Route path='/*' element={<ChatRoute />} />
+      </Routes>
+    </Router>
   );
 }
 
